@@ -2,189 +2,104 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Para Alice 💌</title>
+<title>Miranda ❤️ Mariano</title>
 
 <style>
 body {
     margin: 0;
-    height: 100vh;
-    background: radial-gradient(circle at top, #1f0033, #000);
+    background: radial-gradient(circle, #050505, #000);
     overflow: hidden;
-    font-family: 'Georgia', serif;
-    color: #ffe6f0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    font-family: Arial;
 }
 
-/* Bruma verde inferior */
-.suelo {
+/* TEXTO LATIDO */
+#frase {
     position: absolute;
-    bottom: 0;
+    top: 50%;
     width: 100%;
-    height: 30%;
-    background: radial-gradient(circle at bottom, rgba(120,255,160,0.25), transparent);
-    animation: respirar 6s ease-in-out infinite;
-    z-index: 1;
+    text-align: center;
+    font-size: 50px;
+    color: white;
+    transform: translateY(-50%);
+    animation: latido 1.2s infinite;
 }
 
-@keyframes respirar {
-    0%,100% { opacity: 0.4; }
-    50% { opacity: 0.7; }
+/* LATIDO REAL */
+@keyframes latido {
+    0%   { transform: translateY(-50%) scale(1); }
+    25%  { transform: translateY(-50%) scale(1.2); }
+    40%  { transform: translateY(-50%) scale(1); }
+    60%  { transform: translateY(-50%) scale(1.15); }
+    100% { transform: translateY(-50%) scale(1); }
 }
 
-/* Carta */
-.carta {
-    background: rgba(0,0,0,0.5);
-    padding: 40px;
-    max-width: 600px;
-    border-radius: 20px;
-    box-shadow: 0 0 30px rgba(255,182,193,0.3);
-    font-size: 20px;
-    line-height: 1.6;
-    z-index: 3;
-}
-
-/* Texto */
-#texto {
-    white-space: pre-wrap;
-}
-
-/* Flores laterales */
-.flor {
+/* ESTRELLAS */
+.estrella {
     position: absolute;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: radial-gradient(circle, #ffd1dc, #ff69b4);
-    animation: flotar 4s ease-in-out infinite;
-    opacity: 0.9;
+    width: 2px;
+    height: 2px;
+    background: white;
+    opacity: 0.7;
+    animation: parpadeo 2s infinite alternate;
+}
+
+@keyframes parpadeo {
+    from {opacity: 0.2;}
+    to {opacity: 1;}
+}
+
+/* CORAZONES */
+.corazon {
+    position: absolute;
+    color: pink;
+    animation: flotar 6s linear infinite;
 }
 
 @keyframes flotar {
-    0%,100% { transform: translateY(0) scale(1); }
-    50% { transform: translateY(-10px) scale(1.1); }
-}
-
-/* Pétalos */
-.petalo {
-    position: absolute;
-    width: 18px;
-    height: 28px;
-    background: linear-gradient(180deg, #ff9a9e, #fad0c4);
-    border-radius: 50%;
-    opacity: 0.8;
-    animation: caer linear infinite;
-}
-
-@keyframes caer {
     from {
-        transform: translateY(-40px) rotate(0deg);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(110vh) rotate(360deg);
+        transform: translateY(100vh) scale(1);
         opacity: 1;
     }
-}
-
-/* Destellos */
-.luz {
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    background: rgba(255,255,255,0.8);
-    border-radius: 50%;
-    animation: brillar 3s ease-in-out infinite;
-}
-
-@keyframes brillar {
-    0%,100% { opacity: 0; }
-    50% { opacity: 1; }
+    to {
+        transform: translateY(-10vh) scale(1.5);
+        opacity: 0;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<div class="suelo"></div>
-
-<div class="carta">
-    <div id="texto"></div>
-</div>
+<div id="frase">Miranda ❤️ Mariano</div>
 
 <script>
-/* TEXTO (NO TOCAR SI YA TE GUSTA) */
-const carta = `
-Alice,
 
-No sé en qué momento exacto pasó,
-pero poco a poco empezaste a habitar
-mis pensamientos, mis silencios
-y mis sonrisas.
-
-y se que aun que, estemos tan lejos
-yo te amo de una manera inexplicable
-te amo demasiado,
-aun que, no tengamos tantos meses,
-yo te amo cada dia mucho mass amor
-siempre te amare mi otaku hemosha,
-te amo mi amor, t amoo amor
-
-Hoy solo quiero que sepas algo simple,
-pero verdadero:
-
-Te amo con toda mi alma
-y con todo mi corazón.
-
-Siempre.
-`;
-
-let i = 0;
-const velocidad = 60;
-const contenedor = document.getElementById("texto");
-
-function escribir() {
-    if (i < carta.length) {
-        contenedor.textContent += carta.charAt(i);
-        i++;
-        setTimeout(escribir, velocidad);
-    }
-}
-escribir();
-
-/* Pétalos */
-for (let i = 0; i < 70; i++) {
-    const p = document.createElement("div");
-    p.className = "petalo";
-    p.style.left = Math.random() * 100 + "vw";
-    p.style.animationDuration = (6 + Math.random() * 6) + "s";
-    p.style.animationDelay = Math.random() * 5 + "s";
-    document.body.appendChild(p);
+/* ESTRELLAS */
+for (let i = 0; i < 120; i++) {
+    let estrella = document.createElement("div");
+    estrella.className = "estrella";
+    estrella.style.top = Math.random() * 100 + "vh";
+    estrella.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(estrella);
 }
 
-/* Flores laterales */
-for (let i = 0; i < 10; i++) {
-    const f = document.createElement("div");
-    f.className = "flor";
-    f.style.left = "20px";
-    f.style.top = (i * 10 + 10) + "vh";
-    document.body.appendChild(f);
+/* CORAZONES */
+function crearCorazon() {
+    let c = document.createElement("div");
+    c.className = "corazon";
+    c.innerHTML = "❤️";
+    c.style.left = Math.random() * 100 + "vw";
+    c.style.fontSize = (Math.random() * 20 + 15) + "px";
 
-    const f2 = f.cloneNode();
-    f2.style.left = "calc(100% - 60px)";
-    document.body.appendChild(f2);
+    document.body.appendChild(c);
+
+    setTimeout(() => {
+        c.remove();
+    }, 6000);
 }
 
-/* Destellos */
-for (let i = 0; i < 25; i++) {
-    const l = document.createElement("div");
-    l.className = "luz";
-    l.style.left = Math.random() * 100 + "vw";
-    l.style.top = Math.random() * 100 + "vh";
-    l.style.animationDelay = Math.random() * 3 + "s";
-    document.body.appendChild(l);
-}
+setInterval(crearCorazon, 250);
+
 </script>
 
 </body>
